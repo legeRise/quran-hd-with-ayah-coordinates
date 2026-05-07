@@ -21,25 +21,36 @@ This dataset is based on structured Quran assets collected from multiple sources
   [legeRise/quran-indopak](https://github.com/legeRise/quran-indopak)
 
 From that repository, the following assets were used:
-- indopak-word-by-word.zip
-- indopak-taj-company-16-line-layout.zip
-- indopak-nastaleeq-font.zip
+- indopak-word-by-word.json
+- indopak-taj-company-16-line-layout.json
+- indopak-nastaleeq-font.json
 
 These assets were used as the base for rendering and layout alignment.
 
 ---
 
+
 ## Data Generation Process
 
-A custom Python script was used to generate this dataset.
+The dataset was generated using the provided [export.py](export.py) script in this repository.
+
+**Key features of export.py:**
+
+- Allows choosing between Standard (1240x2100) and High Quality (2480x4200) output resolutions (or both)
+- Lets you select the archive format: zip or 7z (default is 7z, but zip is also supported)
+- Has sensible defaults for most options, but you can customize via command-line flags
+- Produces both the rendered page images and the corresponding ayah coordinate JSON files
 
 **Process overview:**
 
 1. Load structured Quran text and layout assets
 2. Apply 16-line Indo-Pak Mushaf formatting rules
 3. Render full pages as images
-4. Export pages at 2480 x 4200 resolution (WEBP format)
+4. Export pages at your chosen resolution(s) (WEBP format)
 5. Generate ayah coordinate mappings for each page
+6. Optionally bundle the output into a .zip or .7z archive
+
+See the script itself for all available flags and options. The defaults work well, but you can adjust as needed.
 
 ---
 
@@ -74,11 +85,19 @@ para_01/
 
 ---
 
-## Files
+
+## Downloadable Archives
+
+The main dataset outputs are provided as two ZIP files for convenience:
+
+- quran-hd-with-ayah-coordinates-1240x2100.zip (Standard quality, 1240x2100)
+- quran-hd-with-ayah-coordinates-2480x4200.zip (High quality, 2480x4200)
+
+Each archive contains the full set of WEBP images and per-page ayah coordinate JSON files, organized by para (juz).
 
 **WEBP:**
 - Full Quran page image
-- High resolution (2480 x 4200)
+- High resolution (2480 x 4200) or standard (1240 x 2100)
 
 **JSON:**
 - Ayah coordinate data for that page
